@@ -214,7 +214,7 @@ init(){
 			/var/log\
 			${find_common_options}\
 			\(\
-				-regex '^.*/.+\.[[:digit:]](\.[[:alpha:]]+)?$'\
+				-regex '^.*/.+\.[[:digit:]]+(\.[[:alpha:]]+)?$'\
 				-o\
 				-iregex '^.*/.+\.old$'\
 			\)\
