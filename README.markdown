@@ -19,8 +19,8 @@ This is useful for someone doesn't fully trust those powerful "X Cleaner" applic
 
 ### Cleaning User Logs(not implemented yet)
 * Deletes files with the following logrotated filename patterns under home directory(the pattern is stricter due to similar naming style of non-log files(id. est. libraries))
-	- `^.*/.+\.log\.[[:digit:]](\.[[:alpha:]]+)?$`
-	- `^.*/.+\.old$`
+	- `^.*/.+\.log\.[[:digit:]](\.[[:alpha:]]+)?$` (case insensitive)
+	- `^.*/.+\.old$` (case insensitive)
 * Truncate/Empty files with filenames with the following log filename patterns
 	- `^.*/.+\.log$` (case insensitive)
 
