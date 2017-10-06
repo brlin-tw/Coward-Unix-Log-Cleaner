@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# A log cleaner for some circumstances logs are not needed
+# Copyright © 林博仁 <Buo.Ren.Lin@gmail.com> 2017
+# This file is licensed under GPL version 3 or its recent versions, refer The GNU General Public License <https://www.gnu.org/licenses/gpl.html> for more information
+# 
 # We uses unused variables for convenience
 # shellcheck disable=SC2034
 
