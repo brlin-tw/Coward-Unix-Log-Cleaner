@@ -221,8 +221,8 @@ init(){
 			-print0\
 			>"${temp_directory}/system_rotated_log_list.print0"
 		tr\
-			"\\0"\
-			"\\n"\
+			'\0'\
+			'\n'\
 			<"${temp_directory}/system_rotated_log_list.print0"\
 			>"${temp_directory}/system_rotated_log_list"
 		printf --\
@@ -245,8 +245,8 @@ init(){
 			-print0\
 			>"${temp_directory}/system_to_be_truncated_log_list.print0"
 		tr\
-			"\\0"\
-			"\\n"\
+			'\0'\
+			'\n'\
 			<"${temp_directory}/system_to_be_truncated_log_list.print0"\
 			>"${temp_directory}/system_to_be_truncated_log_list"
 		printf --\
