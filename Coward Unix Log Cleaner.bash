@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # A log cleaner for some circumstances logs are not needed
-# Copyright © 林博仁 <Buo.Ren.Lin@gmail.com> 2017
+# Copyright © 林博仁 <Buo.Ren.Lin@gmail.com> 2021
 # This file is licensed under GPL version 3 or its recent versions, refer The GNU General Public License <https://www.gnu.org/licenses/gpl.html> for more information
 # 
 # We uses unused variables for convenience
@@ -49,6 +49,12 @@ if [ -v "BASH_SOURCE[0]" ]; then
 		RUNTIME_EXECUTABLE_DIRECTORY\
 		RUNTIME_EXECUTABLE_PATHABSOLUTE\
 		RUNTIME_COMMANDLINE_BASECOMMAND
+else
+	RUNTIME_EXECUTABLE_PATH=null
+	RUNTIME_EXECUTABLE_FILENAME=__stdin__
+	RUNTIME_EXECUTABLE_NAME=__stdin__
+	RUNTIME_EXECUTABLE_DIRECTORY=null
+	RUNTIME_COMMANDLINE_BASECOMMAND=__stdin__
 fi
 declare -ar RUNTIME_COMMANDLINE_PARAMETERS=("${@}")
 
