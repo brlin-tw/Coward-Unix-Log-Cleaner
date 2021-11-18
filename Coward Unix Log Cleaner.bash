@@ -271,9 +271,60 @@ init(){
 				truncate\
 				"${temp_directory}/system_to_be_truncated_log_list.print0"
 		fi
+	else
+		find\
+			~/\
+			${find_common_options}\
+			\(\
+				-regex '^.*/.+\.log\.[[:digit:]]+(\.[[:alpha:]]+)?$'\
+				-o\
+				-iregex '^.*/.+\.old$'\
+			\)\
+			-print0\
+			>"${temp_directory}/user_rotated_log_list.print0"
+		tr\
+			'\0'\
+			'\n'\
+			<"${temp_directory}/user_rotated_log_list.print0"\
+			>"${temp_directory}/user_rotated_log_list"
+		printf --\
+			'Press enter to start reviewing the list of the files to be deleted in a pager, press "q" to exit the pager.'
+		while ! read -r answer; do :; done
+		less\
+			"${temp_directory}/user_rotated_log_list"
+		if prompt_yes_or_no\
+			'Are you sure you want to delete these files(y/N)? '\
+			N; then
+			process_file_list\
+				remove\
+				"${temp_directory}/user_rotated_log_list.print0"
+		fi
+		# TODO: fix
+		find\
+			~/\
+			-regextype egrep\
+			-iregex '^.*/.+\.log$'\
+			-print0\
+			>"${temp_directory}/user_to_be_truncated_log_list.print0"
+		tr\
+			'\0'\
+			'\n'\
+			<"${temp_directory}/user_to_be_truncated_log_list.print0"\
+			>"${temp_directory}/user_to_be_truncated_log_list"
+		printf --\
+			'Press enter to start reviewing the list of the files to be truncated in a pager, press "q" to exit the pager.'
+		while ! read -r answer; do :; done
+		less\
+			"${temp_directory}/user_to_be_truncated_log_list"
+		if prompt_yes_or_no\
+			'Are you sure you want to truncate these files(y/N)? '\
+			N; then
+			process_file_list\
+				truncate\
+				"${temp_directory}/user_to_be_truncated_log_list.print0"
+		fi
+
 	fi
-	
-	exit 0
 }; declare -fr init
 
 ## Traps: Functions that are triggered when certain condition occurred
@@ -308,7 +359,7 @@ trap_return(){
 trap_interrupt(){
 	printf 'Recieved SIGINT, script is interrupted.\n' 1>&2
 	remove_temp_directory_at_exit="N" 
-	return 0
+	exit 0
 }; declare -fr trap_interrupt; trap trap_interrupt INT
 
 print_help(){
